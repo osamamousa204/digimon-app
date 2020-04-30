@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>result</title>
+</head>
+<body>
+    <header>
+        <h1>result</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/search">search</a></li>
+                <!-- <li><a href="/result">result</a></li> -->
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="allContainer">
+            <%data.forEach(val=>{%>
+    
+            <div class="container">
+                <h3><%=val.name%></h3>
+                <img src="<%=val.img_url%>" alt="digital">
+                <p><%=val.level%></p>
+                <div>
+                    <button class="show">Add</button>
+                    <form class="form" action="./addToFavourate" method="GET">
+                    <input type="text" name="name" value="<%=val.name%>">
+                    <input type="text" name="img_url" value="<%=val.img_url%>">
+                    <input type="text" name="level" value="<%=val.level%>">
+                    <input type="submit" value="add to favorate">
+                    </form>
+                </div>
+            </div>
+            <%})%>
+        </div>
+    </main>
+    
+</body>
+</html>

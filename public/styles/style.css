@@ -5,7 +5,7 @@ h1{
     background-color: crimson;
     text-align: center;
 }
-#allContainer{
+.allContainer{
     margin: 1em auto;
     width: 90%;
     display: flex;
@@ -70,4 +70,51 @@ h1{
     height:200px;
     border-radius: 10%;
     border: 2px solid rgb(151, 27, 27);
+}
+
+.search{
+    margin: 1em auto;
+    background-color: darkblue;
+    text-align: center;
+    padding: 1em;
+}
+.search > input{
+    /* display: block; */
+    text-align: center;
+    margin: 1em;
+}
+nav{
+    margin: auto;
+}
+nav ul{
+    list-style: none;
+    margin: auto;
+    text-align: center;
+}
+nav ul li{
+    display: inline-block;
+    text-align: center;
+    font-size: 25px;
+    margin: 0em 3em;
+}
+
+#error{
+    text-align: center;
+    width: 60%;
+    margin: 4em auto;
+    font-size: 50px;
+    transition: .7s all ease-in-out;
+    animation: 1s error ease-in-out infinite;
+
+}
+
+@keyframes error{
+    0%,100%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(.7);
+        color: red;
+
+    }
 }
