@@ -34,6 +34,10 @@ app.get('/myFavourates', myFavouratesHandler)
 app.get('/details/:digital_id', detailsHandler)
 app.put('/update/:update_id', updateHandler)
 app.delete('/delete/:delete_id', deleteHandler)
+app.get('/search', searchHandler);
+app.get('/result', resultHandler);
+app.get('/searchForDigimonsName', searchForDigimonsNameHandler)
+// app.get('/searchForDigimonslevel', searchForDigimonslevelHandler)
 app.get('*', notFoundHandler)
 
 
@@ -138,7 +142,60 @@ function deleteHandler(req, res) {
 
 }
 
+//***********(searchHandler)**********\\
 
+function searchHandler(req, res) {
+    res.render('./pages/search')
+
+}
+
+//***********(searchHandler)**********\\
+
+function resultHandler(req, res) {
+    res.render('./pages/result')
+}
+
+//***********(searchForDigimonsNameHandler)**********\\
+
+function searchForDigimonsNameHandler(req, res) {
+    //collect the query value
+    let digimonsName = req.query.digimonsName;
+    let radioVal = req.query.name;
+    let url = `https://digimon-api.herokuapp.com/api/digimon/`
+    if(radioVal == 'name'){
+        url = `${url}name/${digimonsName}`;
+    }else  if(radioVal == 'level'){
+        url = `${url}level/${digimonsName}`;
+    }
+
+    //pass it to the url 
+    // let url = `https://digimon-api.herokuapp.com/api/digimon/name/${digimonsName}`;
+    superagent.get(url)
+        .then(data => {
+            let digitalsNameArray = data.body.map(val => {
+                return new Digitals(val)
+            })
+            res.render('./pages/result', { data: digitalsNameArray })
+        }).catch(()=>{
+            res.render('./pages/error')
+        })
+
+}
+//***********(searchForDigimonslevelHandler)**********\\
+
+// function searchForDigimonslevelHandler(req, res) {
+//     //collect the query value
+//     let digimonsLevel = req.query.digimonslevel;
+//     //pass it to the url 
+//     let url = `https://digimon-api.herokuapp.com/api/digimon/level/${digimonsLevel}`;
+//     superagent.get(url)
+//         .then(data => {
+//             let digitalsLevelArray = data.body.map(val => {
+//                 return new Digitals(val)
+//             })
+//             res.render('./pages/result', { data: digitalsLevelArray })
+//         })
+// }
 //====================================(error handlers)========================================\\
 
 function notFoundHandler(req, res) {
